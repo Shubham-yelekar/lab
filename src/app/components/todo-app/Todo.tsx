@@ -23,7 +23,7 @@ const Todo = () => {
     day: "numeric",
   }).format(date);
 
-  const addTodo = (todo) => {
+  const addTodo = (todo: any) => {
     setTodos((prev) => [{ id: Date.now(), ...todo }, ...prev]);
   };
 
