@@ -49,7 +49,7 @@ const TaskCard = ({ task }: { task: Todo }) => {
               checked={task.completed}
               onChange={() => toggleTodo(task.id)}
               name="task"
-              id={task.id}
+              id={task.id.toString()}
               className="absolute opacity-0 bg-slate-200 cursor-pointer left-0 w-full h-[110%]"
             />
             <div
@@ -60,8 +60,7 @@ const TaskCard = ({ task }: { task: Todo }) => {
               <FaCheck />
             </div>
             <label
-              htmlFor={task.id}
-              name="task"
+              htmlFor={task.id.toString()}
               className={`text-base ${
                 task.completed ? "line-through text-gray-500" : ""
               }`}
