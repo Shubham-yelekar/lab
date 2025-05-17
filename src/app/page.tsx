@@ -9,7 +9,7 @@ export default function Home() {
       <div className="p-4 w-full h-16 border-b-1 border-neutral-300 flex items-center justify-center ">
         <h2 className="font-medium text-mds">All Components</h2>
       </div>
-      <div className="grid grid-cols-4 p-8 gap-4">
+      <div className="grid grid-cols-2 p-4 md:grid-cols-4 md:p-8 gap-4">
         {pageLinks.map((page, id) => {
           if (page.name !== "All Components") {
             return (

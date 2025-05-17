@@ -4,6 +4,10 @@ export const pageLinks = [
     href: "/",
   },
   {
+    name: "Animated Tabs",
+    href: "/components/animated-tabs",
+  },
+  {
     name: "Shiny Button",
     href: "/components/shiny-button",
   },

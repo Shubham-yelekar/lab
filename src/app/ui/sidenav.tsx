@@ -37,6 +37,7 @@ export default function SideNav() {
         {pageLinks.map((page, id) => (
           <Link
             key={`${page.name}-page`}
+            onClick={() => setToggleMenu(false)}
             href={page.href}
             className={clsx(
               "p-2 font-medium flex group transition-all duration-300",
