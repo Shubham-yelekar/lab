@@ -8,14 +8,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const layout = ({
+const Layout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
   const pathname = usePathname();
-  console.log(pathname);
-
   return (
     <div className="">
       <div className="p-4 w-full h-8 md:h-16 border-b-1 border-neutral-300 flex items-center justify-center ">
@@ -28,4 +26,4 @@ const layout = ({
   );
 };
 
-export default layout;
+export default Layout;

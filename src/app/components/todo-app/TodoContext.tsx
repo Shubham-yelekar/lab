@@ -1,5 +1,19 @@
 import { createContext, useContext } from "react";
 
+type Todo = {
+  id: number;
+  todo: string;
+  completed: boolean;
+};
+
+type TodoContextType = {
+  todos: Todo[];
+  addTodo: (todo: Todo) => void;
+  deleteTodo: (id: number) => void;
+  updateTodo: (id: number, todo: Todo) => void;
+  toggleTodo: (id: number) => void;
+};
+
 const TodoContext = createContext({
   todos: [
     {
@@ -8,10 +22,10 @@ const TodoContext = createContext({
       completed: false,
     },
   ],
-  addTodo: (todo: any) => {},
-  deleteTodo: (id: any) => {},
-  updateTodo: (id: any, todo: any) => {},
-  toggleTodo: (id: any) => {},
+  addTodo: () => {},
+  deleteTodo: () => {},
+  updateTodo: () => {},
+  toggleTodo: () => {},
 });
 
 const useTodo = () => {

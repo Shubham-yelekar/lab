@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useTodo } from "./TodoContext";
 import TaskCard from "./TaskCard";
 import { motion, AnimatePresence } from "framer-motion";

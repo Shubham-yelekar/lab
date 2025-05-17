@@ -34,7 +34,7 @@ export default function SideNav() {
           "md:flex md:static md:w-full md:bg-transparent"
         )}
       >
-        {pageLinks.map((page, id) => (
+        {pageLinks.map((page) => (
           <Link
             key={`${page.name}-page`}
             onClick={() => setToggleMenu(false)}

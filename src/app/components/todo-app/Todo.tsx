@@ -7,7 +7,6 @@ import FormInput from "./Form";
 import TaskList from "./TaskList";
 import "./styles.css";
 import { TodoProvider } from "./TodoContext";
-import { Import } from "lucide-react";
 
 interface TodoType {
   id: number;

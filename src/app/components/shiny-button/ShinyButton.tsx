@@ -2,14 +2,14 @@
 import React from "react";
 import "./shiny-button.css";
 import { motion } from "framer-motion";
-
+type CustomMotionProps = Partial<Record<string, string | number>>;
 const ShinyButton = () => {
   return (
     <div className="bg-neutral-950 h-[100%] flex items-center justify-center ">
       <motion.button
         className="px-16 py-8 rounded-full relative radial-gradient "
-        initial={{ "--x": "100%", scale: 1 } as any}
-        animate={{ "--x": "-100%" } as any}
+        initial={{ "--x": "100%", scale: 1 } as CustomMotionProps}
+        animate={{ "--x": "-100%" } as CustomMotionProps}
         whileTap={{ scale: 0.97 }}
         transition={{
           repeat: Infinity,

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { clsx } from "clsx";
 import { motion } from "motion/react";
 
-let tabs = [
+const tabs = [
   { id: "home", label: "Home" },
   { id: "work", label: "Work" },
   { id: "resume", label: "Resume" },
@@ -11,7 +11,7 @@ let tabs = [
 ];
 
 const AnimatedTabs = () => {
-  let [activeTab, setActiveTab] = useState(tabs[0].id);
+  const [activeTab, setActiveTab] = useState(tabs[0].id);
   return (
     <div className="bg-neutral-100 h-[100%] flex flex-col items-center justify-center ">
       <div className="flex space-x-1 bg-[#ececec] p-1 border-1 border-neutral-300 rounded-full">
