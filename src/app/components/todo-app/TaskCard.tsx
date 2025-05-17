@@ -6,7 +6,13 @@ import { AiFillEdit } from "react-icons/ai";
 import { IoIosSave } from "react-icons/io";
 import { FaCheck } from "react-icons/fa6";
 
-const TaskCard = ({ task }) => {
+type Todo = {
+  id: number;
+  todo: string;
+  completed: boolean;
+};
+
+const TaskCard = ({ task }: { task: Todo }) => {
   const { toggleTodo, deleteTodo, updateTodo } = useTodo();
 
   const [edit, setEdit] = useState(false);
