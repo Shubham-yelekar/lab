@@ -9,11 +9,15 @@ export default function Home() {
       <div className="p-4 w-full h-16 border-b-1 border-neutral-300 flex items-center justify-center ">
         <h2 className="font-medium text-mds">All Components</h2>
       </div>
-      <div className="grid grid-cols-4 p-8">
+      <div className="grid grid-cols-4 p-8 gap-4">
         {pageLinks.map((page, id) => {
           if (page.name !== "All Components") {
             return (
-              <Link href={page.href} key={`${page.name}-pageCard`} className="">
+              <Link
+                href={page.href}
+                key={`${page.name}-pageCard`}
+                className="border-1 border-neutral-300 py-4 px-8 hover:bg-red-500 hover:text-neutral-100 transition-all duration-300"
+              >
                 {page.name}
               </Link>
             );

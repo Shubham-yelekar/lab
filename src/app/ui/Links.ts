@@ -11,8 +11,4 @@ export const pageLinks = [
     name: "Todo App",
     href: "/components/todo-app",
   },
-  {
-    name: "Scroll Cards",
-    href: "/components/scroll-cards",
-  },
 ];

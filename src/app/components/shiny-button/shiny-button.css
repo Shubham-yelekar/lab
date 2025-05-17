@@ -58,13 +58,4 @@
       rgb(255, 255, 255, 0.1) calc(var(--x) + 100%)
     );
   }
-
-  .repo-link {
-    @apply absolute underline text-gray-400;
-    top: 36px;
-  }
-
-  .repo-link:hover {
-    @apply text-white;
-  }
 }
