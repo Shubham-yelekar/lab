@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@layer components {
+  .action-button {
+    background-color: #fafafa;
+    border: 1px solid #a6a5a4;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .checkmark {
+    background-color: #fafafa;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a6a5a4;
+    pointer-events: none;
+  }
+}

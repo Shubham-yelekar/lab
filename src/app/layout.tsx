@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import SideNav from "./ui/sidenav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
@@ -30,7 +25,7 @@ export default function RootLayout({
     >
       <body className="flex h-screen  flex-col md:flex-row">
         <SideNav />
-        {children}
+        <main className="flex-1 overflow-y-scroll">{children}</main>
       </body>
     </html>
   );
