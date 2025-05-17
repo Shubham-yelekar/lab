@@ -10,7 +10,7 @@ const FormInput = () => {
     e.preventDefault();
     const trimmed = todo.trim();
     if (!trimmed) return;
-    addTodo({ todo: trimmed, completed: false });
+    addTodo({ id: Date.now(), todo: trimmed, completed: false });
     setTodo("");
   };
 
