@@ -38,9 +38,12 @@ const Todo = () => {
   };
 
   useEffect(() => {
-    const todos = JSON.parse(localStorage.getItem("todos"));
+    const todos = localStorage.getItem("todos");
+
+    console.log(todos);
+
     if (todos && todos.length > 0) {
-      setTodos(todos);
+      setTodos(JSON.parse(todos));
     }
   }, []);
 
@@ -67,7 +70,6 @@ const Todo = () => {
           {formattedDate}
         </h2>
         <TaskList />
-        <TaskCard />
       </div>
     </TodoProvider>
   );
