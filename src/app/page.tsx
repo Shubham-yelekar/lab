@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { pageLinks } from "./ui/Links";
@@ -10,7 +9,7 @@ export default function Home() {
         <h2 className="font-medium text-mds">All Components</h2>
       </div>
       <div className="grid grid-cols-2 p-4 md:grid-cols-4 md:p-8 gap-4">
-        {pageLinks.map((page, id) => {
+        {pageLinks.map((page) => {
           if (page.name !== "All Components") {
             return (
               <Link

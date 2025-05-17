@@ -14,7 +14,7 @@ type TodoContextType = {
   toggleTodo: (id: number) => void;
 };
 
-const TodoContext = createContext({
+const TodoContext = createContext<TodoContextType>({
   todos: [
     {
       id: 1,
