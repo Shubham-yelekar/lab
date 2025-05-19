@@ -4,6 +4,10 @@ export const pageLinks = [
     href: "/",
   },
   {
+    name: "Hacker Text Effect",
+    href: "/components/hacker-text",
+  },
+  {
     name: "Animated Tabs",
     href: "/components/animated-tabs",
   },
