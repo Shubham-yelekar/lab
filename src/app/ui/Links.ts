@@ -4,6 +4,10 @@ export const pageLinks = [
     href: "/",
   },
   {
+    name: "Kanban Board",
+    href: "/components/kanban-board",
+  },
+  {
     name: "Hacker Text Effect",
     href: "/components/hacker-text",
   },
