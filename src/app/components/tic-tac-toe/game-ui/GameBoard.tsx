@@ -24,15 +24,18 @@ const GameBoard = ({
   setIsWinner,
   isWinner,
 }: GameBoardProps) => {
+  const [winningArr, setWinningArr] = useState<number[] | null>(null);
   useEffect(() => {
-    const winner = calculateWinner(squares);
+    const winner = calculateWinner(squares, setWinningArr);
+
     if (winner) {
+      console.log(winningArr);
       setIsWinner(winner);
     }
   }, [squares, setIsWinner]);
 
   const handleClick = (id: number) => {
-    if (squares[id] || calculateWinner(squares)) {
+    if (squares[id] || calculateWinner(squares, setWinningArr)) {
       return; // return if square index contains any value
     }
     setSquares((prev) => {
@@ -46,15 +49,13 @@ const GameBoard = ({
   return (
     <>
       <div
-        className={`${caveat.className} antialiased grid grid-cols-3 gap-1.5 bg-[#D8D2C2] w-fit`}
+        className={`${caveat.className} relative antialiased grid grid-cols-3 gap-1.5 bg-[#D8D2C2] w-fit`}
       >
+        {isWinner && (
+          <div className="absolute w-full h-full bg-amber-100/20"></div>
+        )}
         {squares.map((sqr, id) => (
-          <Square
-            isXnext={isXnext}
-            value={sqr}
-            onClick={() => handleClick(id)}
-            key={id}
-          />
+          <Square value={sqr} onClick={() => handleClick(id)} key={id} />
         ))}
       </div>
     </>
@@ -64,12 +65,10 @@ const GameBoard = ({
 type SquareProps = {
   value: string | null;
   onClick: () => void;
-  isXnext: boolean;
 };
 
-const Square = ({ value, onClick, isXnext }: SquareProps) => {
+const Square = ({ value, onClick }: SquareProps) => {
   const textColor = value === "X" ? "#B17457" : "#577EB1";
-  console.log(textColor);
   return (
     <button
       className="bg-white w-24 aspect-square grid place-items-center"
@@ -83,7 +82,10 @@ const Square = ({ value, onClick, isXnext }: SquareProps) => {
   );
 };
 
-function calculateWinner(squares: (string | null)[]) {
+function calculateWinner(
+  squares: (string | null)[],
+  setWinningArr: Dispatch<SetStateAction<number[] | null>>
+) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -98,6 +100,7 @@ function calculateWinner(squares: (string | null)[]) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      setWinningArr((prev) => (prev = lines[i]));
       return squares[a];
     }
   }
