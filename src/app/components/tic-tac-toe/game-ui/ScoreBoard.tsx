@@ -10,23 +10,34 @@ const ScoreBoard = ({ isWinner, isXnext }: ScoreBoardProps) => {
   console.log(isWinner);
 
   return (
-    <div className="h-18 mb-4 flex flex-col gap-2 justify-between items-center">
-      <div className="font-bold text-2xl "> Round 1 </div>
+    <div className="h-24 w-60 mb-4 flex flex-col gap-2 justify-between items-center">
+      <div className="font-bold text-2xl "> Play Tic Tac Toe </div>
       {!isWinner ? (
-        <div className="relative flex items-center justify-between gap-8 p-2">
-          <motion.div className="font-bold text-2xl">Player X</motion.div>
+        <div className="relative flex items-center justify-between gap-8 p-2 w-full">
+          <motion.div className="font-bold text-2xl text-[#B17457] p-2">
+            Player X
+          </motion.div>
           <motion.div
             layout
             style={{
-              left: isXnext ? "-8%" : "50%",
+              left: isXnext ? "-2%" : "60%",
             }}
             transition={{ type: "spring", stiffness: 500, damping: 30 }}
-            className="w-5/8 h-8 bg-amber-200 rounded-4xl  absolute -z-10"
+            className="w-32 h-12 bg-[#E9E5D9] rounded-4xl  absolute -z-10"
           ></motion.div>
-          <motion.div className="font-bold text-2xl">Player O</motion.div>
+          <motion.div className="font-bold text-[#577EB1] text-2xl">
+            Player O
+          </motion.div>
         </div>
       ) : (
-        <h3 className="font-bold text-2xl">Winner : {isWinner}</h3>
+        <motion.h3 layout className="font-bold text-2xl">
+          {isWinner === "X" ? (
+            <span className="text-[#B17457]">Player X</span>
+          ) : (
+            <span className="text-[#577EB1]">Player O</span>
+          )}{" "}
+          wins !!
+        </motion.h3>
       )}
     </div>
   );

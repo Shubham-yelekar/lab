@@ -27,7 +27,7 @@ const TicTacToe = () => {
 
   return (
     <div
-      className={`${caveat.className} flex flex-col h-full items-center justify-center`}
+      className={`${caveat.className} bg-[FAF7F0] flex flex-col h-full items-center justify-center`}
     >
       <ScoreBoard isWinner={isWinner} isXnext={isXnext} />
       <GameBoard
@@ -38,7 +38,9 @@ const TicTacToe = () => {
         isWinner={isWinner}
         setIsWinner={setIsWinner}
       />
-      <button onClick={resetGame}>Reset</button>
+      <button className="text-xl mt-4 underline" onClick={resetGame}>
+        Reset
+      </button>
     </div>
   );
 };

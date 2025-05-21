@@ -46,10 +46,15 @@ const GameBoard = ({
   return (
     <>
       <div
-        className={`${caveat.className} antialiased grid grid-cols-3 gap-2 w-fit`}
+        className={`${caveat.className} antialiased grid grid-cols-3 gap-1.5 bg-[#D8D2C2] w-fit`}
       >
         {squares.map((sqr, id) => (
-          <Square value={sqr} onClick={() => handleClick(id)} key={id} />
+          <Square
+            isXnext={isXnext}
+            value={sqr}
+            onClick={() => handleClick(id)}
+            key={id}
+          />
         ))}
       </div>
     </>
@@ -59,16 +64,21 @@ const GameBoard = ({
 type SquareProps = {
   value: string | null;
   onClick: () => void;
+  isXnext: boolean;
 };
 
-const Square = ({ value, onClick }: SquareProps) => {
+const Square = ({ value, onClick, isXnext }: SquareProps) => {
+  const textColor = value === "X" ? "#B17457" : "#577EB1";
+  console.log(textColor);
   return (
     <button
-      className="bg-cyan-100 w-24 aspect-square grid place-items-center"
+      className="bg-white w-24 aspect-square grid place-items-center"
       data-value={value}
       onClick={onClick}
     >
-      <span className="font-bold text-6xl">{value}</span>
+      <span style={{ color: textColor }} className="font-bold text-6xl">
+        {value}
+      </span>
     </button>
   );
 };

@@ -4,6 +4,10 @@ export const pageLinks = [
     href: "/",
   },
   {
+    name: "Tic Tac Toe",
+    href: "/components/tic-tac-toe",
+  },
+  {
     name: "Kanban Board",
     href: "/components/kanban-board",
   },
