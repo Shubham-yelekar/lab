@@ -69,7 +69,7 @@ type SquareProps = {
 
 const Square = ({ value, onClick, isXnext }: SquareProps) => {
   const textColor = value === "X" ? "#B17457" : "#577EB1";
-  console.log(textColor);
+
   return (
     <button
       className="bg-white w-24 aspect-square grid place-items-center"

@@ -7,8 +7,6 @@ type ScoreBoardProps = {
 };
 
 const ScoreBoard = ({ isWinner, isXnext }: ScoreBoardProps) => {
-  console.log(isWinner);
-
   return (
     <div className="h-24 w-60 mb-4 flex flex-col gap-2 justify-between items-center">
       <div className="font-bold text-2xl "> Play Tic Tac Toe </div>

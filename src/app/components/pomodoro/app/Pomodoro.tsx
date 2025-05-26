@@ -12,7 +12,6 @@ import clsx from "clsx";
 
 const Pomodoro = () => {
   const { darkMode } = useTheme();
-  console.log(darkMode);
 
   return (
     <div

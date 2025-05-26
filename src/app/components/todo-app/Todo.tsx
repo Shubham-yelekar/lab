@@ -40,8 +40,6 @@ const Todo = () => {
   useEffect(() => {
     const todos = localStorage.getItem("todos");
 
-    console.log(todos);
-
     if (todos && todos.length > 0) {
       setTodos(JSON.parse(todos));
     }
