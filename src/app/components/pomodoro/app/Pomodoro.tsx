@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
   RotateCcw,
   Bolt,
@@ -12,6 +12,7 @@ import clsx from "clsx";
 
 const Pomodoro = () => {
   const { darkMode } = useTheme();
+  const [openSettings, setOpenSettings] = useState<boolean>(false);
 
   return (
     <div
@@ -42,6 +43,7 @@ const Pomodoro = () => {
             <RotateCcw />
           </button>
           <button
+            onClick={() => setOpenSettings((prev) => !prev)}
             className={clsx(
               "p-3  rounded-3xl  cursor-pointer transition-all",
               darkMode
@@ -52,7 +54,12 @@ const Pomodoro = () => {
             <Bolt />
           </button>
         </div>
-        {/* <Setting /> */}
+        {openSettings && (
+          <Setting
+            toggleSettings={openSettings}
+            setToggleSettings={setOpenSettings}
+          />
+        )}
       </div>
       <Switch />
     </div>
@@ -75,7 +82,14 @@ const Timer = () => {
         </h1>
       </div>
       <div>
-        <button className="bg-neutral-900 text-neutral-100 px-8 py-2 rounded-4xl">
+        <button
+          className={clsx(
+            "px-8 py-2 rounded-4xl",
+            darkMode
+              ? "bg-neutral-100 text-neutral-800 "
+              : "bg-neutral-900 text-neutral-100 "
+          )}
+        >
           Start
         </button>
       </div>
@@ -95,6 +109,12 @@ const Sessions = () => {
 
 const Switch = () => {
   const { darkMode, toggleTheme } = useTheme();
+  const [time, setTime] = useState(null);
+
+  useEffect(() => {
+    const date = new Date().getTime();
+    console.log(date);
+  }, []);
 
   return (
     <div className="flex items-center justify-center">
@@ -111,13 +131,29 @@ const Switch = () => {
   );
 };
 
-const Setting = () => {
+type settingsProp = {
+  toggleSettings: boolean;
+  setToggleSettings: Dispatch<SetStateAction<boolean>>;
+};
+
+const Setting = ({ toggleSettings, setToggleSettings }: settingsProp) => {
+  const { darkMode, toggleTheme } = useTheme();
   return (
-    <div className="absolute top-0 left-0 h-full w-full bg-orange-100 p-3 flex flex-col justify-between rounded-4xl">
+    <div
+      className={clsx(
+        "absolute top-0 left-0 h-full w-full  p-3 flex flex-col justify-between rounded-4xl",
+        darkMode ? "bg-neutral-900 text-neutral-100" : "bg-orange-100"
+      )}
+    >
       <div>
         <div className="flex justify-between items-center mb-4">
           <span className="text-xl ">Timer</span>
-          <div className="flex items-center gap-4 bg-orange-200 p-1 rounded-3xl  ">
+          <div
+            className={clsx(
+              "flex items-center gap-4 p-1 rounded-3xl",
+              darkMode ? "bg-neutral-800" : "bg-orange-100"
+            )}
+          >
             <button>
               <CirclePlus />{" "}
             </button>
@@ -129,7 +165,12 @@ const Setting = () => {
         </div>
         <div className="flex justify-between items-center mb-4">
           <span className="text-xl ">Break</span>
-          <div className="flex items-center gap-4 bg-orange-200 p-1 rounded-3xl  ">
+          <div
+            className={clsx(
+              "flex items-center gap-4 p-1 rounded-3xl",
+              darkMode ? "bg-neutral-800" : "bg-orange-100"
+            )}
+          >
             <button>
               <CirclePlus />{" "}
             </button>
@@ -141,7 +182,12 @@ const Setting = () => {
         </div>
         <div className="flex justify-between items-center mb-4">
           <span className="text-xl ">Sessions</span>
-          <div className="flex items-center gap-4 bg-orange-200 p-1 rounded-3xl  ">
+          <div
+            className={clsx(
+              "flex items-center gap-4 p-1 rounded-3xl",
+              darkMode ? "bg-neutral-800" : "bg-orange-100"
+            )}
+          >
             <button>
               <CirclePlus />{" "}
             </button>
@@ -153,10 +199,25 @@ const Setting = () => {
         </div>
       </div>
       <div className="w-full flex justify-between">
-        <button className="p-3 bg-orange-200 rounded-3xl hover:bg-orange-400 cursor-pointer transition-all">
+        <button
+          className={clsx(
+            "p-3  rounded-3xl  cursor-pointer transition-all",
+            darkMode
+              ? "bg-orange-400 hover:bg-orange-500"
+              : "bg-orange-200 hover:bg-orange-400"
+          )}
+        >
           <CheckCheck />
         </button>
-        <button className="p-3 bg-orange-200 rounded-3xl hover:bg-orange-400 cursor-pointer transition-all">
+        <button
+          onClick={() => setToggleSettings((prev) => !prev)}
+          className={clsx(
+            "p-3 rounded-3xl cursor-pointer transition-all, darkMode",
+            darkMode
+              ? "bg-neutral-800 hover:bg-neutral-700"
+              : "bg-orange-200 hover:bg-orange-400 "
+          )}
+        >
           <Bolt />
         </button>
       </div>
