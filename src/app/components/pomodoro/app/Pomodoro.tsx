@@ -14,7 +14,7 @@ import { usePomodoro } from "./PomodoroContext";
 const Pomodoro = () => {
   const { darkMode } = useTheme();
   const [openSettings, setOpenSettings] = useState<boolean>(false);
-
+  const { isRunning, reset } = usePomodoro();
   return (
     <div
       className={clsx(
@@ -34,6 +34,7 @@ const Pomodoro = () => {
         <Sessions />
         <div className="w-full flex justify-between">
           <button
+            onClick={reset}
             className={clsx(
               "p-3  rounded-3xl  cursor-pointer transition-all",
               darkMode
@@ -44,9 +45,10 @@ const Pomodoro = () => {
             <RotateCcw />
           </button>
           <button
+            disabled={isRunning}
             onClick={() => setOpenSettings((prev) => !prev)}
             className={clsx(
-              "p-3  rounded-3xl  cursor-pointer transition-all",
+              "p-3  rounded-3xl  cursor-pointer transition-all disabled:opacity-50 disabled:cursor-not-allowed ",
               darkMode
                 ? "bg-neutral-800 hover:bg-neutral-700 text-amber-50"
                 : "bg-orange-200 hover:bg-orange-400"
@@ -70,22 +72,6 @@ const Pomodoro = () => {
 const Timer = () => {
   const { darkMode } = useTheme();
   const { timeLeft, start, pause, isRunning } = usePomodoro();
-  const [time, setTime] = useState(timeLeft);
-
-  useEffect(() => {
-    if (!isRunning) return;
-
-    const interval = setInterval(() => {
-      setTime((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [time]);
 
   const formatTime = (seconds: number): string => {
     const m = Math.floor(seconds / 60)
@@ -105,20 +91,35 @@ const Timer = () => {
             darkMode ? "text-neutral-100" : "text-neutral-900"
           )}
         >
-          {formatTime(time)}
+          {formatTime(timeLeft)}
         </h1>
       </div>
       <div>
-        <button
-          className={clsx(
-            "px-8 py-2 rounded-4xl",
-            darkMode
-              ? "bg-neutral-100 text-neutral-800 "
-              : "bg-neutral-900 text-neutral-100 "
-          )}
-        >
-          Start
-        </button>
+        {isRunning ? (
+          <button
+            onClick={pause}
+            className={clsx(
+              "px-8 py-2 rounded-4xl cursor-pointer",
+              darkMode
+                ? "bg-neutral-100 text-neutral-800 "
+                : "bg-neutral-900 text-neutral-100 "
+            )}
+          >
+            Pause
+          </button>
+        ) : (
+          <button
+            onClick={start}
+            className={clsx(
+              "px-8 py-2 rounded-4xl cursor-pointer",
+              darkMode
+                ? "bg-neutral-100 text-neutral-800 "
+                : "bg-neutral-900 text-neutral-100 "
+            )}
+          >
+            Start
+          </button>
+        )}
       </div>
     </div>
   );
@@ -159,9 +160,22 @@ type settingsProp = {
 
 const Setting = ({ toggleSettings, setToggleSettings }: settingsProp) => {
   const { darkMode, toggleTheme } = useTheme();
+  const { setDurations } = usePomodoro();
 
+  const [time, setTime] = useState(25);
+  const [session, setSession] = useState(3);
+  const [breakTime, setBreakTime] = useState(5);
   const handleSubmit = () => {
+    setDurations({ time, session, breakTime });
     setToggleSettings((prev) => !prev);
+  };
+
+  const formatTime = (seconds: number): string => {
+    const m = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
+    const s = (seconds % 60).toString().padStart(2, "0");
+    return `${m}:${s}`;
   };
 
   return (
@@ -180,11 +194,11 @@ const Setting = ({ toggleSettings, setToggleSettings }: settingsProp) => {
               darkMode ? "bg-neutral-800" : "bg-orange-200"
             )}
           >
-            <button>
-              <CirclePlus />{" "}
+            <button onClick={() => setTime((t) => t + 1)}>
+              <CirclePlus />
             </button>
-            <span className="text-xl">25</span>
-            <button>
+            <span className="text-xl">{time}</span>
+            <button onClick={() => setTime((t) => t - 1)}>
               <CircleMinus />
             </button>
           </div>
