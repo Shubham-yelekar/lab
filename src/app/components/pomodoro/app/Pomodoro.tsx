@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useTheme } from "./ThemeContext";
 import clsx from "clsx";
+import { usePomodoro } from "./PomodoroContext";
 
 const Pomodoro = () => {
   const { darkMode } = useTheme();
@@ -68,6 +69,32 @@ const Pomodoro = () => {
 
 const Timer = () => {
   const { darkMode } = useTheme();
+  const { timeLeft, start, pause, isRunning } = usePomodoro();
+  const [time, setTime] = useState(timeLeft);
+
+  useEffect(() => {
+    if (!isRunning) return;
+
+    const interval = setInterval(() => {
+      setTime((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [time]);
+
+  const formatTime = (seconds: number): string => {
+    const m = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
+    const s = (seconds % 60).toString().padStart(2, "0");
+    return `${m}:${s}`;
+  };
+
   return (
     <div className="w-64 flex gap-4 flex-col items-center justify-center">
       <div className="text-4xl">🍅</div>
@@ -78,7 +105,7 @@ const Timer = () => {
             darkMode ? "text-neutral-100" : "text-neutral-900"
           )}
         >
-          25:00
+          {formatTime(time)}
         </h1>
       </div>
       <div>
@@ -109,12 +136,6 @@ const Sessions = () => {
 
 const Switch = () => {
   const { darkMode, toggleTheme } = useTheme();
-  const [time, setTime] = useState(null);
-
-  useEffect(() => {
-    const date = new Date().getTime();
-    console.log(date);
-  }, []);
 
   return (
     <div className="flex items-center justify-center">
@@ -138,6 +159,11 @@ type settingsProp = {
 
 const Setting = ({ toggleSettings, setToggleSettings }: settingsProp) => {
   const { darkMode, toggleTheme } = useTheme();
+
+  const handleSubmit = () => {
+    setToggleSettings((prev) => !prev);
+  };
+
   return (
     <div
       className={clsx(
@@ -151,7 +177,7 @@ const Setting = ({ toggleSettings, setToggleSettings }: settingsProp) => {
           <div
             className={clsx(
               "flex items-center gap-4 p-1 rounded-3xl",
-              darkMode ? "bg-neutral-800" : "bg-orange-100"
+              darkMode ? "bg-neutral-800" : "bg-orange-200"
             )}
           >
             <button>
@@ -168,7 +194,7 @@ const Setting = ({ toggleSettings, setToggleSettings }: settingsProp) => {
           <div
             className={clsx(
               "flex items-center gap-4 p-1 rounded-3xl",
-              darkMode ? "bg-neutral-800" : "bg-orange-100"
+              darkMode ? "bg-neutral-800" : "bg-orange-200"
             )}
           >
             <button>
@@ -185,7 +211,7 @@ const Setting = ({ toggleSettings, setToggleSettings }: settingsProp) => {
           <div
             className={clsx(
               "flex items-center gap-4 p-1 rounded-3xl",
-              darkMode ? "bg-neutral-800" : "bg-orange-100"
+              darkMode ? "bg-neutral-800" : "bg-orange-200"
             )}
           >
             <button>
@@ -200,6 +226,7 @@ const Setting = ({ toggleSettings, setToggleSettings }: settingsProp) => {
       </div>
       <div className="w-full flex justify-between">
         <button
+          onClick={handleSubmit}
           className={clsx(
             "p-3  rounded-3xl  cursor-pointer transition-all",
             darkMode
