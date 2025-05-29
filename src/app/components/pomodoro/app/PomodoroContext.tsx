@@ -63,11 +63,13 @@ const PomodoroProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const setDurations = ({ session, breakTime }: Durations) => {
+  const setDurations = ({ time, session, breakTime }: Durations) => {
     if (interval.current) {
       clearInterval(interval.current);
     }
-    setCurrentTime(session * 60);
+    setCurrentTime(time * 60);
+    console.log(time);
+
     setIsRunning(false);
   };
 

@@ -31,7 +31,7 @@ const Pomodoro = () => {
         )}
       >
         <Timer />
-        <Sessions />
+        {/* <Sessions /> */}
         <div className="w-full flex justify-between">
           <button
             onClick={reset}
@@ -165,6 +165,7 @@ const Setting = ({ toggleSettings, setToggleSettings }: settingsProp) => {
   const [time, setTime] = useState(25);
   const [session, setSession] = useState(3);
   const [breakTime, setBreakTime] = useState(5);
+
   const handleSubmit = () => {
     setDurations({ time, session, breakTime });
     setToggleSettings((prev) => !prev);
@@ -194,11 +195,11 @@ const Setting = ({ toggleSettings, setToggleSettings }: settingsProp) => {
               darkMode ? "bg-neutral-800" : "bg-orange-200"
             )}
           >
-            <button onClick={() => setTime((t) => t + 1)}>
+            <button onClick={() => setTime((t) => Math.min(t + 1, 60))}>
               <CirclePlus />
             </button>
             <span className="text-xl">{time}</span>
-            <button onClick={() => setTime((t) => t - 1)}>
+            <button onClick={() => setTime((t) => Math.max(t - 1, 15))}>
               <CircleMinus />
             </button>
           </div>
@@ -211,16 +212,16 @@ const Setting = ({ toggleSettings, setToggleSettings }: settingsProp) => {
               darkMode ? "bg-neutral-800" : "bg-orange-200"
             )}
           >
-            <button>
-              <CirclePlus />{" "}
+            <button onClick={() => setBreakTime((t) => Math.min(t + 1, 25))}>
+              <CirclePlus />
             </button>
-            <span className="text-xl">25</span>
-            <button>
+            <span className="text-xl">{breakTime}</span>
+            <button onClick={() => setBreakTime((t) => Math.max(t - 1, 5))}>
               <CircleMinus />
             </button>
           </div>
         </div>
-        <div className="flex justify-between items-center mb-4">
+        {/* <div className="flex justify-between items-center mb-4">
           <span className="text-xl ">Sessions</span>
           <div
             className={clsx(
@@ -236,7 +237,7 @@ const Setting = ({ toggleSettings, setToggleSettings }: settingsProp) => {
               <CircleMinus />
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="w-full flex justify-between">
         <button
