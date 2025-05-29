@@ -4,6 +4,10 @@ export const pageLinks = [
     href: "/",
   },
   {
+    name: "Pomodoro Clock",
+    href: "/components/pomodoro",
+  },
+  {
     name: "Apple Dock",
     href: "/components/apple-dock",
   },
